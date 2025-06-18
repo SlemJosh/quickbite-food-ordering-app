@@ -30,6 +30,22 @@
     <h2 class="mb-4">🧾 Order Summary</h2>
     <div id="checkoutItems" class="row"></div>
     <hr />
+
+    <h5 class="mb-3">Select Payment Method</h5>
+    <div class="btn-group w-100 mb-3" role="group" aria-label="Payment options">
+      <input type="radio" class="btn-check" name="paymentMethod" id="visa" autocomplete="off" value="Visa">
+      <label class="btn btn-outline-primary" for="visa">💳 Visa</label>
+
+      <input type="radio" class="btn-check" name="paymentMethod" id="cash" autocomplete="off" value="Cash">
+      <label class="btn btn-outline-success" for="cash">💵 Cash</label>
+
+      <input type="radio" class="btn-check" name="paymentMethod" id="iou" autocomplete="off" value="IOU">
+      <label class="btn btn-outline-warning" for="iou">🧾 IOU</label>
+
+      <input type="radio" class="btn-check" name="paymentMethod" id="crypto" autocomplete="off" value="Crypto">
+      <label class="btn btn-outline-info" for="crypto">🪙 Crypto</label>
+    </div>
+
     <div class="text-end">
       <h4>Total: $<span id="checkoutTotal">0.00</span></h4>
       <button class="btn btn-success mt-3" onclick="confirmOrder()">Confirm Order</button>
@@ -116,7 +132,18 @@
     }
 
     function confirmOrder() {
+      const selected = document.querySelector('input[name="paymentMethod"]:checked');
+      if (!selected) {
+        alert("Please select a payment method.");
+        return;
+      }
+
+      const method = selected.value;
       localStorage.removeItem("cart");
+
+      const modalText = document.querySelector("#thankYouModal .modal-body p");
+      modalText.textContent = `Thanks for ordering with QuickBite! Your payment via ${method} was received. Your food is on the way!`;
+
       const modal = new bootstrap.Modal(document.getElementById("thankYouModal"));
       modal.show();
     }
