@@ -39,7 +39,7 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 
 ## Contributing
 
-This project was developed independently as part of my full-stack training. I used Bootstrap documentation and the DummyJSON recipe API for sample data. Some initial structural guidance and files were adapted from instructor Akash’s materials in the SimpliLearn Full Stack MERN program. Special thanks also to my AI assistant “Marty” for helping plan, structure, and refine the code and documentation.
+This project was developed independently as part of my training in the SimpliLearn Full Stack MERN program. I used Bootstrap docs, the DummyJSON recipe API, and occasional support tools like ChatGPT to guide problem-solving — similar to referencing Stack Overflow or MDN. The layout and features were designed by me to reinforce frontend concepts covered in class with instructor Akash.
 
 This README was generated using [my own README Generator CLI app](https://github.com/SlemJosh/readme-generator), a tool I built in Node.js to streamline Markdown documentation for projects like this one.
 
