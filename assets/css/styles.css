@@ -1,0 +1,8 @@
+.food-item {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  text-align: center;
+  background-color: #f8f9fa;
+}
