@@ -6,3 +6,9 @@
   text-align: center;
   background-color: #f8f9fa;
 }
+
+.carousel-inner img {
+  object-fit: cover;
+  height: 300px;
+  width: 100%;
+}

@@ -43,6 +43,14 @@ This project was developed independently as part of my full-stack training. I us
 
 This README was generated using [my own README Generator CLI app](https://github.com/SlemJosh/readme-generator), a tool I built in Node.js to streamline Markdown documentation for projects like this one.
 
+## Image Credits
+
+All carousel images were sourced from [Pixabay.com](https://pixabay.com), which provides royalty-free images under the Pixabay License (free for commercial and noncommercial use, no attribution required — but appreciated).
+
+- **Burger Image**: [Burger by amirali mirhashemian](https://pixabay.com/photos/burger-double-burger-hamburger-food-7323697/)
+- **Fries Image**: [French Fries by Engin Akyurt](https://pixabay.com/photos/bowl-french-fries-food-fries-1842294/)
+- **Pizza Image**: [Pizza by Engin Akyurt](https://pixabay.com/photos/pizza-food-fast-food-muzarella-1317699/)
+
 
 ## Tests
 
