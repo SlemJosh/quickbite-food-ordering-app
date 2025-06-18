@@ -1,86 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>QuickBite Cart</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QuickBite | Your Cart</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-    <a class="navbar-brand" href="index.html">QuickBite</a>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
-        <li class="nav-item"><a class="nav-link" href="cart.html">Cart (<span id="cartCount">0</span>)</a></li>
-      </ul>
+  <!-- 🔒 Session Protection -->
+  <script>
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const loginTime = parseInt(localStorage.getItem("loginTime"));
+    const sessionLimit = 15 * 60 * 1000;
+
+    if (!isLoggedIn || isNaN(loginTime) || (Date.now() - loginTime > sessionLimit)) {
+      localStorage.clear();
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark bg-dark px-3">
+    <a class="navbar-brand" href="index.html">🍔 QuickBite</a>
+    <div class="ms-auto d-flex align-items-center gap-2" id="navButtons">
+      <!-- Dynamic buttons injected -->
     </div>
   </nav>
 
-  <div class="container mt-4">
-    <h2>Your Cart</h2>
+  <div class="container my-5">
+    <h2 class="mb-4">🛒 Your Cart</h2>
     <div id="cartItems" class="row"></div>
-    <h4 class="mt-4">Total: $<span id="totalPrice">0.00</span></h4>
+    <hr />
+    <div class="text-end">
+      <h4>Total: $<span id="totalAmount">0.00</span></h4>
+      <a href="checkout.html" class="btn btn-success mt-2">Proceed to Checkout</a>
+    </div>
   </div>
 
-  <script>
-    function renderCart() {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const container = document.getElementById("cartItems");
-      const totalSpan = document.getElementById("totalPrice");
-      container.innerHTML = "";
+  <!-- Bootstrap + Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+  <!-- Dynamic Navbar and Cart Logic -->
+  <script>
+    const userEmail = localStorage.getItem("userEmail");
+    const nav = document.getElementById("navButtons");
+
+    if (isLoggedIn && userEmail) {
+      nav.innerHTML = `
+        <span class="text-light small">👤 ${userEmail}</span>
+        <a href="menu.html" class="btn btn-outline-light btn-sm">Menu</a>
+        <button onclick="logout()" class="btn btn-outline-danger btn-sm">Logout</button>
+      `;
+    } else {
+      nav.innerHTML = `<a href="login.html" class="btn btn-success btn-sm">Login</a>`;
+    }
+
+    function logout() {
+      localStorage.clear();
+      window.location.href = "index.html";
+    }
+
+    // Cart Rendering
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartContainer = document.getElementById("cartItems");
+    const totalAmountEl = document.getElementById("totalAmount");
+
+    function renderCart() {
+      cartContainer.innerHTML = "";
       let total = 0;
 
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+        totalAmountEl.textContent = "0.00";
+        return;
+      }
+
       cart.forEach((item, index) => {
-        total += item.price * item.quantity;
+        const subtotal = item.quantity * item.price;
+        total += subtotal;
 
         const col = document.createElement("div");
-        col.className = "col-md-4 mb-3";
+        col.className = "col-md-6 mb-3";
         col.innerHTML = `
           <div class="card h-100">
-            <img src="${item.image}" class="card-img-top" alt="${item.name}" style="height: 200px; object-fit: cover;">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">${item.name}</h5>
-              <p class="card-text">Price: $${item.price}</p>
-              <p class="card-text">Quantity: 
-                <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(${index}, -1)">−</button>
-                ${item.quantity}
-                <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(${index}, 1)">+</button>
-              </p>
-              <button class="btn btn-sm btn-outline-danger mt-auto" onclick="removeItem(${index})">
-                🗑️ Remove
-              </button>
+            <div class="row g-0">
+              <div class="col-4">
+                <img src="${item.image}" class="img-fluid rounded-start" alt="${item.name}">
+              </div>
+              <div class="col-8">
+                <div class="card-body">
+                  <h5 class="card-title">${item.name}</h5>
+                  <p class="card-text">$${item.price.toFixed(2)} each</p>
+                  <div class="input-group input-group-sm mb-2" style="width: 140px;">
+                    <button class="btn btn-outline-secondary" onclick="changeQty(${index}, -1)">-</button>
+                    <span class="input-group-text">${item.quantity}</span>
+                    <button class="btn btn-outline-secondary" onclick="changeQty(${index}, 1)">+</button>
+                  </div>
+                  <button class="btn btn-sm btn-danger" onclick="removeItem(${index})">🗑 Remove</button>
+                </div>
+              </div>
             </div>
           </div>
         `;
-        container.appendChild(col);
+        cartContainer.appendChild(col);
       });
 
-      totalSpan.innerText = total.toFixed(2);
-      updateCartCount();
+      totalAmountEl.textContent = total.toFixed(2);
     }
 
-    function updateQuantity(index, delta) {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart[index].quantity += delta;
-      if (cart[index].quantity <= 0) {
-        cart.splice(index, 1);
+    function changeQty(index, delta) {
+      if (cart[index]) {
+        cart[index].quantity += delta;
+        if (cart[index].quantity <= 0) {
+          cart.splice(index, 1);
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
       }
-      localStorage.setItem("cart", JSON.stringify(cart));
-      renderCart();
     }
 
     function removeItem(index) {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
       cart.splice(index, 1);
       localStorage.setItem("cart", JSON.stringify(cart));
       renderCart();
-    }
-
-    function updateCartCount() {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const total = cart.reduce((sum, item) => sum + item.quantity, 0);
-      document.getElementById("cartCount").innerText = total;
     }
 
     renderCart();
