@@ -39,6 +39,7 @@
       if (email && password) {
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("userEmail", email);
+        localStorage.setItem("loginTime", Date.now());
         window.location.href = "index.html";
       } else {
         const errorMsg = document.getElementById("errorMsg");
