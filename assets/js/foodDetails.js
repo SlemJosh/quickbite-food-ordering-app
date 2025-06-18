@@ -1,5 +1,3 @@
-// assets/js/foodDetails.js
-
 function getStickyPrice(title) {
   const storedPrices = JSON.parse(localStorage.getItem("foodPrices")) || {};
 
@@ -15,16 +13,24 @@ function getStickyPrice(title) {
 
 function addToCart(name, image, price) {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push({ name, image, price });
-  localStorage.setItem("cart", JSON.stringify(cart));
 
-  // Update cart count in navbar if it exists
-  const cartCount = document.getElementById("cartCount");
-  if (cartCount) {
-    cartCount.innerText = cart.length;
+  const existingItem = cart.find(item => item.name === name);
+  if (existingItem) {
+    existingItem.quantity++;
+  } else {
+    cart.push({ name, image, price, quantity: 1 });
   }
 
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
   alert(`${name} added to cart!`);
+}
+
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const cartCount = document.getElementById("cartCount");
+  if (cartCount) cartCount.innerText = total;
 }
 
 function loadFoodDetails() {
@@ -32,7 +38,7 @@ function loadFoodDetails() {
     .then(res => res.json())
     .then(data => {
       const container = document.getElementById("menuContainer");
-      container.innerHTML = ""; // clear in case of refresh
+      container.innerHTML = "";
 
       data.recipes.forEach(item => {
         const price = getStickyPrice(item.name);
@@ -54,6 +60,10 @@ function loadFoodDetails() {
 
         container.appendChild(card);
       });
+
+      updateCartCount();
     })
     .catch(err => console.error("Error fetching food:", err));
 }
+
+window.addToCart = addToCart;
