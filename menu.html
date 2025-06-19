@@ -105,7 +105,6 @@
     if (isLoggedIn && userEmail) {
       nav.innerHTML = `
         <span class="text-light small">👤 ${userEmail}</span>
-        <a href="menu.html" class="btn btn-outline-light btn-sm">Menu</a>
         <a href="cart.html" class="btn btn-outline-warning btn-sm">Cart (<span id="cartCount">0</span>)</a>
         <button onclick="logout()" class="btn btn-outline-danger btn-sm">Logout</button>
       `;
