@@ -33,7 +33,7 @@
 
   <!-- Menu Section -->
   <div class="container my-4">
-    <h2 class="mb-4">🍽️ Our Menu</h2>
+    <h2 class="mb-4">Our Menu</h2>
 
     <!-- Filter Dropdown -->
     <div class="dropdown mb-3">
@@ -105,7 +105,7 @@
 
     if (isLoggedIn && userEmail) {
       nav.innerHTML = `
-        <span class="text-light small">👤 ${userEmail}</span>
+        <span class="text-light small">${userEmail}</span>
         <a href="cart.html" class="btn btn-outline-warning btn-sm">Cart (<span id="cartCount">0</span>)</a>
         <button onclick="logout()" class="btn btn-outline-danger btn-sm">Logout</button>
       `;

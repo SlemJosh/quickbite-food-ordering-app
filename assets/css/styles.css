@@ -1,4 +1,4 @@
-/* Global Styles */
+/* === Global Layout === */
 body {
   background-color: #f3f7f0;
   background-image: radial-gradient(circle at center, #eef4ea, #dcead2 70%);
@@ -7,12 +7,12 @@ body {
   color: #2e3b2e;
 }
 
-/* Typography */
+/* === Typography === */
 h1, h2, h3, h4, h5, h6 {
   color: #2e3b2e;
 }
 
-/* Buttons */
+/* === Buttons === */
 .btn-outline-primary,
 .btn-outline-secondary,
 .btn-outline-success,
@@ -30,7 +30,7 @@ h1, h2, h3, h4, h5, h6 {
   border-color: #3b6b3b;
 }
 
-/* Add-to-Cart Buttons */
+/* === Add-to-Cart Buttons === */
 button[data-food-name] {
   border-color: #4d7a4d !important;
   color: #4d7a4d !important;
@@ -47,7 +47,7 @@ button[data-food-name].btn-success {
   border-color: #2e5e2e !important;
 }
 
-/* Food Cards */
+/* === Food Cards === */
 .food-item {
   padding: 15px;
   margin-bottom: 20px;
@@ -69,7 +69,7 @@ button[data-food-name].btn-success {
   cursor: pointer;
 }
 
-/* Toast Notifications */
+/* === Toast Notifications === */
 .toast {
   background-color: #4d7a4d;
   color: white;
@@ -79,7 +79,7 @@ button[data-food-name].btn-success {
   filter: invert(1);
 }
 
-/* Cart Page */
+/* === Cart Page === */
 .cart-item {
   border-radius: 15px;
   background-color: #f5f9f4;
@@ -99,7 +99,7 @@ button[data-food-name].btn-success {
   border-radius: 12px 12px 0 0;
 }
 
-/* Dropdowns and Pagination */
+/* === Dropdowns & Pagination === */
 .dropdown-menu {
   background-color: #e6f0e6;
 }
@@ -108,13 +108,13 @@ button[data-food-name].btn-success {
   background-color: #d1e4d1;
 }
 
-/* Modal */
+/* === Modal === */
 .modal-content {
   background-color: #f5f9f4;
   color: #2e3b2e;
 }
 
-/* Modal Ingredient List */
+/* === Modal Ingredient List === */
 #modalIngredients li {
   margin-bottom: 4px;
   font-style: italic;
