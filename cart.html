@@ -9,7 +9,7 @@
 </head>
 <body>
 
-  <!-- Session check: redirect to login if not logged in or session expired -->
+  <!-- Session Protection -->
   <script>
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const loginTime = parseInt(localStorage.getItem("loginTime"));
@@ -53,6 +53,8 @@
     const checkoutBtn = document.getElementById("checkoutBtn");
 
     const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    // Render navbar buttons based on login state
     if (isLoggedIn && userEmail) {
       nav.innerHTML = `
         <span class="text-light small">👤 ${userEmail}</span>
@@ -64,11 +66,13 @@
       nav.innerHTML = `<a href="login.html" class="btn btn-success btn-sm">Login</a>`;
     }
 
+    // Logout user and clear session
     function logout() {
       localStorage.clear();
       window.location.href = "index.html";
     }
 
+    // Render all items in cart
     function renderCart() {
       cartContainer.innerHTML = "";
       let total = 0;
@@ -108,6 +112,7 @@
       updateCheckoutButton();
     }
 
+    // Enable or disable checkout button
     function updateCheckoutButton() {
       if (cart.length === 0) {
         checkoutBtn.disabled = true;
@@ -120,6 +125,7 @@
       }
     }
 
+    // Increase or decrease item quantity
     function changeQty(index, delta) {
       if (cart[index]) {
         cart[index].quantity += delta;
@@ -132,6 +138,7 @@
       }
     }
 
+    // Remove item from cart
     function removeItem(index) {
       cart.splice(index, 1);
       localStorage.setItem("cart", JSON.stringify(cart));
@@ -139,12 +146,14 @@
       updateCartCount();
     }
 
+    // Update cart item count in navbar
     function updateCartCount() {
       const updatedCount = cart.reduce((sum, item) => sum + item.quantity, 0);
       const countEl = document.getElementById("cartCount");
       if (countEl) countEl.textContent = updatedCount;
     }
 
+    // Initial render
     renderCart();
   </script>
 </body>
