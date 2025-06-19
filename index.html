@@ -53,7 +53,7 @@
     </div>
 
     <!-- Call to Action -->
-    <a href="menu.html" id="ctaButton" class="btn btn-success btn-lg">Go to Menu</a>
+    <a id="ctaButton" class="btn btn-success btn-lg">Login to View the Menu</a>
   </header>
 
   <!-- Bootstrap JS -->
@@ -64,6 +64,7 @@
     const nav = document.getElementById("navButtons");
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const userEmail = localStorage.getItem("userEmail");
+    const ctaButton = document.getElementById("ctaButton");
 
     if (isLoggedIn && userEmail) {
       nav.innerHTML = `
@@ -71,9 +72,12 @@
         <a href="cart.html" class="btn btn-outline-warning btn-sm">Cart (<span id="cartCount">0</span>)</a>
         <button onclick="logout()" class="btn btn-outline-danger btn-sm">Logout</button>
       `;
-      document.getElementById("ctaButton").textContent = "Browse Menu";
+      ctaButton.textContent = "Browse Menu";
+      ctaButton.href = "menu.html";
     } else {
       nav.innerHTML = `<a href="login.html" class="btn btn-success">Login</a>`;
+      ctaButton.textContent = "Login to View the Menu";
+      ctaButton.href = "login.html";
     }
 
     function logout() {
