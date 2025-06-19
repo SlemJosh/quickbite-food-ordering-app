@@ -52,8 +52,8 @@
       </button>
     </div>
 
-    <!-- Dynamic Call to Action Button -->
-    <a id="ctaButton" class="btn btn-success btn-lg" style="display: none;"></a>
+    <!-- Call to Action -->
+    <a href="menu.html" id="ctaButton" class="btn btn-success btn-lg">Go to Menu</a>
   </header>
 
   <!-- Bootstrap JS -->
@@ -62,7 +62,6 @@
   <!-- Auth Display Logic -->
   <script>
     const nav = document.getElementById("navButtons");
-    const ctaButton = document.getElementById("ctaButton");
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const userEmail = localStorage.getItem("userEmail");
 
@@ -72,22 +71,25 @@
         <a href="cart.html" class="btn btn-outline-warning btn-sm">Cart (<span id="cartCount">0</span>)</a>
         <button onclick="logout()" class="btn btn-outline-danger btn-sm">Logout</button>
       `;
-      ctaButton.textContent = "Browse Menu";
-      ctaButton.href = "menu.html";
-      ctaButton.style.display = "inline-block";
+      document.getElementById("ctaButton").textContent = "Browse Menu";
     } else {
       nav.innerHTML = `<a href="login.html" class="btn btn-success">Login</a>`;
-      ctaButton.textContent = "Login to Start Ordering";
-      ctaButton.href = "login.html";
-      ctaButton.style.display = "inline-block";
     }
 
     function logout() {
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("userEmail");
-      localStorage.removeItem("loginTime");
       window.location.href = "index.html";
     }
+
+    function updateCartCount() {
+      const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+      const totalCount = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      const countEl = document.getElementById("cartCount");
+      if (countEl) countEl.textContent = totalCount;
+    }
+
+    updateCartCount();
   </script>
 </body>
 </html>
