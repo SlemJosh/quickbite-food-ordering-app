@@ -32,7 +32,23 @@
   <!-- Menu Content -->
   <div class="container my-4">
     <h2 class="mb-4">Our Menu</h2>
+    <div class="dropdown mb-3">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Filter by Meal Type
+  </button>
+  <ul class="dropdown-menu" id="mealFilterMenu">
+    <li><a class="dropdown-item" href="#" onclick="filterByMealType('Breakfast')">Breakfast</a></li>
+    <li><a class="dropdown-item" href="#" onclick="filterByMealType('Lunch')">Lunch</a></li>
+    <li><a class="dropdown-item" href="#" onclick="filterByMealType('Dinner')">Dinner</a></li>
+    <li><a class="dropdown-item" href="#" onclick="filterByMealType('Snack')">Snack</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="#" onclick="clearMealFilter()">Show All</a></li>
+  </ul>
+</div>
+
     <div class="row" id="menuContainer"></div>
+    <div class="d-flex justify-content-center mt-4" id="paginationContainer"></div>
+
   </div>
 
   <!-- Scripts -->
