@@ -1,3 +1,4 @@
+/* 🍽️ Menu Card Styling */
 .food-item {
   padding: 15px;
   margin-bottom: 20px;
@@ -14,18 +15,39 @@
   cursor: pointer;
 }
 
+/* 🖼️ Carousel Image Fix */
 .carousel-inner img {
   object-fit: cover;
   height: 300px;
   width: 100%;
 }
 
-/* Optional: Toast animation */
+/* 🔔 Toast Notification */
 .toast {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
-
 .toast.show {
   opacity: 1;
+}
+
+/* 🛒 Cart Item Styling */
+.cart-item {
+  border-radius: 15px;
+  background-color: #f8f9fa;
+  padding: 12px;
+  font-size: 0.95rem;
+  transition: transform 0.15s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cart-item:hover {
+  transform: scale(1.015);
+}
+
+/* 📸 Cart Image */
+.cart-img {
+  height: 140px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
 }

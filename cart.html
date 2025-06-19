@@ -23,9 +23,7 @@
   <!-- Navbar -->
   <nav class="navbar navbar-dark bg-dark px-3">
     <a class="navbar-brand" href="index.html">🍔 QuickBite</a>
-    <div class="ms-auto d-flex align-items-center gap-2" id="navButtons">
-      <!-- Dynamic buttons injected -->
-    </div>
+    <div class="ms-auto d-flex align-items-center gap-2" id="navButtons"></div>
   </nav>
 
   <div class="container my-5">
@@ -81,25 +79,19 @@
         total += subtotal;
 
         const col = document.createElement("div");
-        col.className = "col-md-6 mb-3";
+        col.className = "col-md-6 col-lg-4 mb-3";
         col.innerHTML = `
-          <div class="card h-100">
-            <div class="row g-0">
-              <div class="col-4">
-                <img src="${item.image}" class="img-fluid rounded-start" alt="${item.name}">
+          <div class="card cart-item h-100">
+            <img src="${item.image}" class="card-img-top cart-img" alt="${item.name}">
+            <div class="card-body">
+              <h5 class="card-title">${item.name}</h5>
+              <p class="card-text">$${item.price.toFixed(2)} each</p>
+              <div class="input-group input-group-sm mb-2" style="width: 140px; margin: auto;">
+                <button class="btn btn-outline-secondary" onclick="changeQty(${index}, -1)">-</button>
+                <span class="input-group-text">${item.quantity}</span>
+                <button class="btn btn-outline-secondary" onclick="changeQty(${index}, 1)">+</button>
               </div>
-              <div class="col-8">
-                <div class="card-body">
-                  <h5 class="card-title">${item.name}</h5>
-                  <p class="card-text">$${item.price.toFixed(2)} each</p>
-                  <div class="input-group input-group-sm mb-2" style="width: 140px;">
-                    <button class="btn btn-outline-secondary" onclick="changeQty(${index}, -1)">-</button>
-                    <span class="input-group-text">${item.quantity}</span>
-                    <button class="btn btn-outline-secondary" onclick="changeQty(${index}, 1)">+</button>
-                  </div>
-                  <button class="btn btn-sm btn-danger" onclick="removeItem(${index})">🗑 Remove</button>
-                </div>
-              </div>
+              <button class="btn btn-sm btn-danger mt-2" onclick="removeItem(${index})">🗑 Remove</button>
             </div>
           </div>
         `;
