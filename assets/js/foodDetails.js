@@ -1,3 +1,4 @@
+// Price Handling
 function getStickyPrice(title) {
   const storedPrices = JSON.parse(localStorage.getItem("foodPrices")) || {};
   if (storedPrices[title]) return storedPrices[title];
@@ -7,6 +8,7 @@ function getStickyPrice(title) {
   return newPrice;
 }
 
+// Toast Notifications
 function showToast(message = "Item added to cart!") {
   const toastEl = document.getElementById("toastNotification");
   if (toastEl) {
@@ -16,6 +18,7 @@ function showToast(message = "Item added to cart!") {
   }
 }
 
+// Cart Management
 function addToCart(name, image, price) {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const existingItem = cart.find(item => item.name === name);
@@ -46,6 +49,7 @@ function updateCartCount() {
   if (cartCount) cartCount.innerText = total;
 }
 
+// Button State Management
 function updateButtons(name) {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const item = cart.find(i => i.name === name);
@@ -66,6 +70,7 @@ function updateButtons(name) {
   });
 }
 
+// Pagination and Filtering
 const itemsPerPage = 9;
 let currentPage = 1;
 let allRecipes = [];
@@ -137,6 +142,7 @@ function updatePagination(list) {
   }
 }
 
+// Meal Type Filtering
 function filterByMealType(type) {
   filteredRecipes = allRecipes.filter(recipe =>
     recipe.mealType && recipe.mealType.includes(type)
@@ -151,6 +157,7 @@ function clearMealFilter() {
   renderPage(currentPage);
 }
 
+// Recipe Fetching and Rendering
 function loadFoodDetails() {
   fetch("https://dummyjson.com/recipes")
     .then(res => res.json())
@@ -161,6 +168,7 @@ function loadFoodDetails() {
     .catch(err => console.error("Error fetching food:", err));
 }
 
+// Modal Setup
 function showModal(item) {
   const modal = new bootstrap.Modal(document.getElementById("foodModal"));
   document.getElementById("modalImage").src = item.image;
@@ -180,5 +188,6 @@ function showModal(item) {
   modal.show();
 }
 
+// Export to Global Scope
 window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
