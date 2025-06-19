@@ -1,4 +1,4 @@
-// Price Handling
+// ==== Price Handling ====
 function getStickyPrice(title) {
   const storedPrices = JSON.parse(localStorage.getItem("foodPrices")) || {};
   if (storedPrices[title]) return storedPrices[title];
@@ -8,7 +8,7 @@ function getStickyPrice(title) {
   return newPrice;
 }
 
-// Toast Notifications
+// ==== Toast Notifications ====
 function showToast(message = "Item added to cart!") {
   const toastEl = document.getElementById("toastNotification");
   if (toastEl) {
@@ -18,7 +18,7 @@ function showToast(message = "Item added to cart!") {
   }
 }
 
-// Cart Management
+// ==== Cart Management ====
 function addToCart(name, image, price) {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const existingItem = cart.find(item => item.name === name);
@@ -49,20 +49,17 @@ function updateCartCount() {
   if (cartCount) cartCount.innerText = total;
 }
 
-// Button State Management
+// ==== Button State ====
 function updateButtons(name) {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const item = cart.find(i => i.name === name);
+
   document.querySelectorAll(`[data-food-name="${name}"]`).forEach(button => {
-    if (!item) {
-      button.textContent = "Add to Cart";
-      button.classList.add("btn-outline-success");
-      button.classList.remove("btn-success");
-    } else {
-      button.textContent = `Added${item.quantity > 1 ? ' x' + item.quantity : ''}`;
-      button.classList.remove("btn-outline-success");
-      button.classList.add("btn-success");
-    }
+    button.textContent = item
+      ? `Added${item.quantity > 1 ? ' x' + item.quantity : ''}`
+      : "Add to Cart";
+    button.classList.toggle("btn-success", !!item);
+    button.classList.toggle("btn-outline-success", !item);
   });
 
   document.querySelectorAll(`[data-remove-name="${name}"]`).forEach(removeBtn => {
@@ -70,7 +67,7 @@ function updateButtons(name) {
   });
 }
 
-// Pagination and Filtering
+// ==== Pagination and Filtering ====
 const itemsPerPage = 9;
 let currentPage = 1;
 let allRecipes = [];
@@ -91,7 +88,6 @@ function renderPage(page) {
 
     const card = document.createElement("div");
     card.className = "col-md-4 mb-3";
-
     card.innerHTML = `
       <div class="card food-item">
         <div onclick='showModal(${JSON.stringify(item)})'>
@@ -114,12 +110,11 @@ function renderPage(page) {
             data-remove-name="${item.name}"
             style="${inCart ? 'display:inline-block;' : 'display:none;'}"
             onclick="removeFromCart('${item.name}')">
-            ❌
+            Remove
           </button>
         </div>
       </div>
     `;
-
     container.appendChild(card);
   });
 
@@ -142,7 +137,6 @@ function updatePagination(list) {
   }
 }
 
-// Meal Type Filtering
 function filterByMealType(type) {
   filteredRecipes = allRecipes.filter(recipe =>
     recipe.mealType && recipe.mealType.includes(type)
@@ -157,18 +151,7 @@ function clearMealFilter() {
   renderPage(currentPage);
 }
 
-// Recipe Fetching and Rendering
-function loadFoodDetails() {
-  fetch("https://dummyjson.com/recipes")
-    .then(res => res.json())
-    .then(data => {
-      allRecipes = data.recipes;
-      renderPage(currentPage);
-    })
-    .catch(err => console.error("Error fetching food:", err));
-}
-
-// Modal Setup
+// ==== Modal Rendering ====
 function showModal(item) {
   const modal = new bootstrap.Modal(document.getElementById("foodModal"));
   document.getElementById("modalImage").src = item.image;
@@ -188,6 +171,21 @@ function showModal(item) {
   modal.show();
 }
 
-// Export to Global Scope
+// ==== Fetch and Init ====
+function loadFoodDetails() {
+  fetch("https://dummyjson.com/recipes")
+    .then(res => res.json())
+    .then(data => {
+      allRecipes = data.recipes;
+      renderPage(currentPage);
+    })
+    .catch(err => console.error("Error fetching food:", err));
+}
+
+// Expose only necessary functions
 window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
+window.filterByMealType = filterByMealType;
+window.clearMealFilter = clearMealFilter;
+window.loadFoodDetails = loadFoodDetails;
+window.showModal = showModal;
