@@ -1,4 +1,19 @@
-/* 🍽️ Menu Card Styling */
+/* ------------------------------
+   Global Site Styles
+------------------------------ */
+
+/* Background for All Pages */
+body {
+  background-color: #fdf6f0;
+  background-image: radial-gradient(circle at center, #fef9f0, #f4efe2 70%);
+  background-attachment: fixed;
+  background-size: cover;
+  color: #333; /* Ensures text is readable even under dark mode extensions */
+}
+
+/* ------------------------------
+   Menu Page: Food Card Styling
+------------------------------ */
 .food-item {
   padding: 15px;
   margin-bottom: 20px;
@@ -15,14 +30,23 @@
   cursor: pointer;
 }
 
-/* 🖼️ Carousel Image Fix */
+.card .card-body:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+/* ------------------------------
+   Carousel Image Styling
+------------------------------ */
 .carousel-inner img {
   object-fit: cover;
   height: 300px;
   width: 100%;
 }
 
-/* 🔔 Toast Notification */
+/* ------------------------------
+   Toast Notification Styling
+------------------------------ */
 .toast {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
@@ -31,7 +55,9 @@
   opacity: 1;
 }
 
-/* 🛒 Cart Item Styling */
+/* ------------------------------
+   Cart Page Styling
+------------------------------ */
 .cart-item {
   border-radius: 15px;
   background-color: #f8f9fa;
@@ -45,18 +71,16 @@
   transform: scale(1.015);
 }
 
-/* 📸 Cart Image */
+/* Cart Item Image */
 .cart-img {
   height: 140px;
   object-fit: cover;
   border-radius: 12px 12px 0 0;
 }
 
-.card .card-body:hover {
-  background-color: #f0f0f0;
-  cursor: pointer;
-}
-
+/* ------------------------------
+   Modal Styling
+------------------------------ */
 #modalIngredients li {
   margin-bottom: 4px;
   font-style: italic;

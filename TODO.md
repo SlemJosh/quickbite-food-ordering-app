@@ -1,6 +1,6 @@
-# QuickBite Project - TODOs ✅ Updated June 19
+# QuickBite TODO List ✅🛒
 
-### ✅ Completed Tasks
+## ✅ Completed Tasks
 - [x] Add login page (front-end only) with dummy credentials  
 - [x] Restrict access to the menu page unless logged in  
 - [x] Add logout option to the navbar when logged in  
@@ -16,15 +16,14 @@
 - [x] Push commits for each major feature addition  
 - [x] Bonus: Add toast/alert when adding to cart  
 - [x] Bonus: Style login page error for wrong credentials  
+- [x] Add modals to each card to show larger images and additional details  
+- [x] Change "Add" button text on menu items to "Added" or "Added x2" if clicked again  
 
-### ⏳ In Progress / Remaining
-- [ ] Add modals to each card to show larger images and additional details
+---
 
-### 🆕 New Tasks (as of June 19)
-- [ ] Set fallback dark background theme across all pages
-- [ ] Update index.html button to say “Menu” if logged in
-- [ ] Hide index login button once user is logged in
-- [ ] Make hamburger icon in navbar link to menu page when logged in
-- [ ] Update hamburger text to say “Menu” when logged in
-- [ ] Change "Add" button text on menu items to "Added" or "Added x2" if clicked again
-
+## ⏳ Remaining Tasks (Polish & Final Touches)
+- [ ] Set fallback dark background theme across all pages  
+- [ ] Update index.html button to say “Menu” if logged in  
+- [ ] Hide index login button once user is logged in  
+- [ ] Make hamburger icon in navbar link to menu page when logged in  
+- [ ] Update hamburger text to say “Menu” when logged in  
