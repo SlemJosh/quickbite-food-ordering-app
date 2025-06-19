@@ -26,7 +26,20 @@ function addToCart(name, image, price) {
   }
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCartCount();
+  updateAddButtonText(name);
   showToast(`${name} added to cart!`);
+}
+
+function updateAddButtonText(name) {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const item = cart.find(i => i.name === name);
+  if (!item) return;
+
+  document.querySelectorAll(`[data-food-name="${name}"]`).forEach(button => {
+    button.textContent = `Added${item.quantity > 1 ? ' x' + item.quantity : ''}`;
+    button.classList.remove("btn-outline-primary");
+    button.classList.add("btn-success");
+  });
 }
 
 function updateCartCount() {
@@ -53,6 +66,7 @@ function renderPage(page) {
     const price = getStickyPrice(item.name);
     const card = document.createElement("div");
     card.className = "col-md-4 mb-3";
+
     card.innerHTML = `
       <div class="card food-item">
         <div onclick='showModal(${JSON.stringify(item)})'>
@@ -64,11 +78,18 @@ function renderPage(page) {
           </div>
         </div>
         <div class="card-footer bg-transparent border-top-0">
-          <button class="btn btn-outline-primary w-100" onclick="addToCart('${item.name}', '${item.image}', ${price})">Add to Cart</button>
+          <button 
+            class="btn btn-outline-primary w-100" 
+            data-food-name="${item.name}" 
+            onclick="addToCart('${item.name}', '${item.image}', ${price})">
+            Add to Cart
+          </button>
         </div>
       </div>
     `;
+
     container.appendChild(card);
+    updateAddButtonText(item.name);
   });
 
   updatePagination(list);
