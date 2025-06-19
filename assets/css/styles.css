@@ -1,7 +1,4 @@
-/* ------------------------------
-   Global Site Styles - Earthy Green Theme
------------------------------- */
-
+/* Global Styles */
 body {
   background-color: #f3f7f0;
   background-image: radial-gradient(circle at center, #eef4ea, #dcead2 70%);
@@ -10,32 +7,30 @@ body {
   color: #2e3b2e;
 }
 
-/* ------------------------------
-   Typography
------------------------------- */
+/* Typography */
 h1, h2, h3, h4, h5, h6 {
   color: #2e3b2e;
 }
 
-/* ------------------------------
-   Buttons
------------------------------- */
+/* Buttons */
 .btn-outline-primary,
 .btn-outline-secondary,
-.btn-outline-success {
+.btn-outline-success,
+.btn-outline-warning {
   color: #3b6b3b;
   border-color: #3b6b3b;
 }
 
 .btn-outline-primary:hover,
 .btn-outline-secondary:hover,
-.btn-outline-success:hover {
+.btn-outline-success:hover,
+.btn-outline-warning:hover {
   background-color: #3b6b3b;
   color: #fff;
   border-color: #3b6b3b;
 }
 
-/* Special Add-to-Cart Button */
+/* Add-to-Cart Buttons */
 button[data-food-name] {
   border-color: #4d7a4d !important;
   color: #4d7a4d !important;
@@ -46,16 +41,13 @@ button[data-food-name]:hover {
   color: #fff !important;
 }
 
-/* When item already added */
 button[data-food-name].btn-success {
   background-color: #2e5e2e !important;
   color: #fff !important;
   border-color: #2e5e2e !important;
 }
 
-/* ------------------------------
-   Cards
------------------------------- */
+/* Food Cards */
 .food-item {
   padding: 15px;
   margin-bottom: 20px;
@@ -77,9 +69,7 @@ button[data-food-name].btn-success {
   cursor: pointer;
 }
 
-/* ------------------------------
-   Toast Notification Styling
------------------------------- */
+/* Toast Notifications */
 .toast {
   background-color: #4d7a4d;
   color: white;
@@ -89,9 +79,7 @@ button[data-food-name].btn-success {
   filter: invert(1);
 }
 
-/* ------------------------------
-   Cart Page Styling
------------------------------- */
+/* Cart Page */
 .cart-item {
   border-radius: 15px;
   background-color: #f5f9f4;
@@ -111,9 +99,7 @@ button[data-food-name].btn-success {
   border-radius: 12px 12px 0 0;
 }
 
-/* ------------------------------
-   Dropdowns and Pagination
------------------------------- */
+/* Dropdowns and Pagination */
 .dropdown-menu {
   background-color: #e6f0e6;
 }
@@ -122,30 +108,13 @@ button[data-food-name].btn-success {
   background-color: #d1e4d1;
 }
 
-.btn-outline-secondary,
-.btn-outline-warning {
-  color: #3b6b3b;
-  border-color: #3b6b3b;
-}
-
-.btn-outline-secondary:hover,
-.btn-outline-warning:hover {
-  background-color: #3b6b3b;
-  color: #fff;
-  border-color: #3b6b3b;
-}
-
-/* ------------------------------
-   Modal
------------------------------- */
+/* Modal */
 .modal-content {
   background-color: #f5f9f4;
   color: #2e3b2e;
 }
 
-/* ------------------------------
-   Ingredients list
------------------------------- */
+/* Modal Ingredient List */
 #modalIngredients li {
   margin-bottom: 4px;
   font-style: italic;
