@@ -14,8 +14,7 @@ QuickBite is a responsive, front-end food ordering application designed to simul
 ## Live Demo
 
 🚀 Try it live here:  
-**[QuickBite on Netlify](https://your-deployment-link.netlify.app)**  
-_(This link will be updated after deployment)_
+🔗 [https://quickbite-order.netlify.app](https://quickbite-order.netlify.app)
 
 ## Table of Contents
 
