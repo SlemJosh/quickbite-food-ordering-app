@@ -17,7 +17,10 @@
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-    <a class="navbar-brand" href="index.html">🍔 QuickBite</a>
+    <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+      <span style="font-size: 1.4rem;">🍔</span>
+      <span class="fw-bold text-light">QuickBite</span>
+    </a>
     <div class="ms-auto d-flex align-items-center gap-2" id="navButtons">
       <!-- Dynamic buttons injected here -->
     </div>
@@ -29,7 +32,7 @@
     <p class="lead">Order fast. Eat happy. With QuickBite.</p>
 
     <!-- Carousel -->
-   <div id="foodCarousel" class="carousel slide mb-4" data-bs-ride="carousel" data-bs-interval="3000" data-bs-pause="hover" style="max-width: 600px; margin: auto;">
+    <div id="foodCarousel" class="carousel slide mb-4" data-bs-ride="carousel" data-bs-interval="3000" data-bs-pause="hover" style="max-width: 600px; margin: auto;">
       <div class="carousel-inner rounded shadow">
         <div class="carousel-item active">
           <img src="images/pizza.jpg" class="d-block w-100" alt="A delicious cheesy pizza on a wooden table">
@@ -49,8 +52,8 @@
       </button>
     </div>
 
-    <!-- Login CTA -->
-    <a href="login.html" id="ctaButton" class="btn btn-success btn-lg">Login to Start Ordering</a>
+    <!-- Call to Action -->
+    <a href="menu.html" id="ctaButton" class="btn btn-success btn-lg">Go to Menu</a>
   </header>
 
   <!-- Bootstrap JS -->
@@ -65,11 +68,10 @@
     if (isLoggedIn && userEmail) {
       nav.innerHTML = `
         <span class="text-light small">👤 ${userEmail}</span>
-        <a href="menu.html" class="btn btn-outline-light btn-sm">Menu</a>
         <a href="cart.html" class="btn btn-outline-warning btn-sm">Cart (<span id="cartCount">0</span>)</a>
         <button onclick="logout()" class="btn btn-outline-danger btn-sm">Logout</button>
       `;
-      document.getElementById("ctaButton").style.display = "none";
+      document.getElementById("ctaButton").textContent = "Browse Menu";
     } else {
       nav.innerHTML = `<a href="login.html" class="btn btn-success">Login</a>`;
     }
@@ -77,7 +79,7 @@
     function logout() {
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("userEmail");
-      window.location.reload();
+      window.location.href = "index.html";
     }
   </script>
 </body>
