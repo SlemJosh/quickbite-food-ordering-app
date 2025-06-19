@@ -86,3 +86,9 @@ body {
   font-style: italic;
   color: #555;
 }
+
+.carousel-inner img {
+  object-fit: cover;
+  height: 300px;
+  width: 100%;
+}
