@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-  <!-- 🔒 Session Protection -->
+ 
+  <!-- Session check: redirect to login if not logged in or session expired -->
   <script>
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const loginTime = parseInt(localStorage.getItem("loginTime"));
@@ -29,6 +30,7 @@
     <div class="ms-auto d-flex align-items-center gap-2" id="navButtons"></div>
   </nav>
 
+  <!-- Checkout Content -->
   <div class="container my-5">
     <h2 class="mb-4">🧾 Order Summary</h2>
     <div id="checkoutItems" class="row"></div>
@@ -55,7 +57,7 @@
     </div>
   </div>
 
-  <!-- ✅ Thank You Modal -->
+  <!-- Thank You Modal -->
   <div class="modal fade" id="thankYouModal" tabindex="-1" aria-labelledby="thankYouModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content text-center">

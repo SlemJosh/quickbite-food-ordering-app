@@ -10,7 +10,7 @@
 
 <body onload="loadFoodDetails()">
 
-  <!-- Session Protection -->
+  <!-- Session check: redirect to login if not logged in or session expired -->
   <script>
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const loginTime = parseInt(localStorage.getItem("loginTime"));
