@@ -7,7 +7,6 @@ function getStickyPrice(title) {
   return newPrice;
 }
 
-// ✅ Bootstrap Toast setup
 function showToast(message = "Item added to cart!") {
   const toastEl = document.getElementById("toastNotification");
   if (toastEl) {
@@ -56,12 +55,16 @@ function renderPage(page) {
     card.className = "col-md-4 mb-3";
     card.innerHTML = `
       <div class="card food-item">
-        <img src="${item.image}" class="card-img-top" alt="${item.name}" style="height: 200px; object-fit: cover;">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">${item.name}</h5>
-          <p class="card-text">Rating: ${item.rating}</p>
-          <p class="card-text"><strong>Price:</strong> $${price}</p>
-          <button class="btn btn-outline-primary mt-auto" onclick="addToCart('${item.name}', '${item.image}', ${price})">Add to Cart</button>
+        <div onclick='showModal(${JSON.stringify(item)})'>
+          <img src="${item.image}" class="card-img-top" alt="${item.name}" style="height: 200px; object-fit: cover;">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">${item.name}</h5>
+            <p class="card-text">Rating: ${item.rating}</p>
+            <p class="card-text"><strong>Price:</strong> $${price}</p>
+          </div>
+        </div>
+        <div class="card-footer bg-transparent border-top-0">
+          <button class="btn btn-outline-primary w-100" onclick="addToCart('${item.name}', '${item.image}', ${price})">Add to Cart</button>
         </div>
       </div>
     `;
@@ -110,6 +113,25 @@ function loadFoodDetails() {
       renderPage(currentPage);
     })
     .catch(err => console.error("Error fetching food:", err));
+}
+
+function showModal(item) {
+  const modal = new bootstrap.Modal(document.getElementById("foodModal"));
+  document.getElementById("modalImage").src = item.image;
+  document.getElementById("modalName").innerText = item.name;
+  document.getElementById("modalServings").innerText = item.servings;
+  document.getElementById("modalRating").innerText = item.rating;
+  document.getElementById("modalPrice").innerText = getStickyPrice(item.name);
+
+  const ingredientsList = document.getElementById("modalIngredients");
+  ingredientsList.innerHTML = "";
+  item.ingredients.forEach(ingredient => {
+    const li = document.createElement("li");
+    li.textContent = ingredient;
+    ingredientsList.appendChild(li);
+  });
+
+  modal.show();
 }
 
 window.addToCart = addToCart;
