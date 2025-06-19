@@ -20,7 +20,6 @@
       window.location.href = "login.html";
     }
 
-    // New: Prevent checkout if cart is empty
     const tempCart = JSON.parse(localStorage.getItem("cart")) || [];
     if (!tempCart || tempCart.length === 0) {
       alert("Your cart is empty. Please add items before checking out.");
@@ -40,7 +39,7 @@
   <!-- Checkout Content -->
   <div class="container my-5">
     <h2 class="mb-4">🧾 Order Summary</h2>
-    <div id="checkoutItems" class="row"></div>
+    <div id="checkoutItems" class="table-responsive mb-4"></div>
     <hr />
 
     <h5 class="mb-3">Select Payment Method</h5>
@@ -114,31 +113,38 @@
         return;
       }
 
-      cart.forEach(item => {
-        const subtotal = item.quantity * item.price;
-        total += subtotal;
+      const table = document.createElement("table");
+      table.className = "table table-striped text-center align-middle";
 
-        const col = document.createElement("div");
-        col.className = "col-md-6 mb-3";
-        col.innerHTML = `
-          <div class="card h-100">
-            <div class="row g-0">
-              <div class="col-4">
-                <img src="${item.image}" class="img-fluid rounded-start" alt="${item.name}">
-              </div>
-              <div class="col-8">
-                <div class="card-body">
-                  <h5 class="card-title">${item.name}</h5>
-                  <p class="card-text">Qty: ${item.quantity} @ $${item.price.toFixed(2)}</p>
-                  <p class="card-text fw-bold">Subtotal: $${subtotal.toFixed(2)}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-        checkoutContainer.appendChild(col);
-      });
+      table.innerHTML = `
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Price</th>
+            <th scope="col">Qty</th>
+            <th scope="col">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${cart.map(item => {
+            const subtotal = item.quantity * item.price;
+            total += subtotal;
+            return `
+              <tr>
+                <td class="text-start">
+                  <img src="${item.image}" alt="${item.name}" style="width: 40px; height: 40px; object-fit: cover; margin-right: 10px;">
+                  ${item.name}
+                </td>
+                <td>$${item.price.toFixed(2)}</td>
+                <td>${item.quantity}</td>
+                <td class="fw-bold">$${subtotal.toFixed(2)}</td>
+              </tr>
+            `;
+          }).join("")}
+        </tbody>
+      `;
 
+      checkoutContainer.appendChild(table);
       checkoutTotal.textContent = total.toFixed(2);
     }
 
