@@ -1,26 +1,68 @@
 /* ------------------------------
-   Global Site Styles
+   Global Site Styles - Earthy Green Theme
 ------------------------------ */
 
-/* Background for All Pages */
 body {
-  background-color: #fdf6f0;
-  background-image: radial-gradient(circle at center, #fef9f0, #f4efe2 70%);
+  background-color: #f3f7f0;
+  background-image: radial-gradient(circle at center, #eef4ea, #dcead2 70%);
   background-attachment: fixed;
   background-size: cover;
-  color: #333; /* Ensures text is readable even under dark mode extensions */
+  color: #2e3b2e;
 }
 
 /* ------------------------------
-   Menu Page: Food Card Styling
+   Typography
+------------------------------ */
+h1, h2, h3, h4, h5, h6 {
+  color: #2e3b2e;
+}
+
+/* ------------------------------
+   Buttons
+------------------------------ */
+.btn-outline-primary,
+.btn-outline-secondary,
+.btn-outline-success {
+  color: #3b6b3b;
+  border-color: #3b6b3b;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-secondary:hover,
+.btn-outline-success:hover {
+  background-color: #3b6b3b;
+  color: #fff;
+  border-color: #3b6b3b;
+}
+
+/* Special Add-to-Cart Button */
+button[data-food-name] {
+  border-color: #4d7a4d !important;
+  color: #4d7a4d !important;
+}
+
+button[data-food-name]:hover {
+  background-color: #4d7a4d !important;
+  color: #fff !important;
+}
+
+/* When item already added */
+button[data-food-name].btn-success {
+  background-color: #2e5e2e !important;
+  color: #fff !important;
+  border-color: #2e5e2e !important;
+}
+
+/* ------------------------------
+   Cards
 ------------------------------ */
 .food-item {
   padding: 15px;
   margin-bottom: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #aac3aa;
   border-radius: 15px;
   text-align: center;
-  background-color: #f8f9fa;
+  background-color: #f5f9f4;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -31,28 +73,20 @@ body {
 }
 
 .card .card-body:hover {
-  background-color: #f0f0f0;
+  background-color: #e6f0e6;
   cursor: pointer;
-}
-
-/* ------------------------------
-   Carousel Image Styling
------------------------------- */
-.carousel-inner img {
-  object-fit: cover;
-  height: 300px;
-  width: 100%;
 }
 
 /* ------------------------------
    Toast Notification Styling
 ------------------------------ */
 .toast {
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  background-color: #4d7a4d;
+  color: white;
 }
-.toast.show {
-  opacity: 1;
+
+.toast .btn-close {
+  filter: invert(1);
 }
 
 /* ------------------------------
@@ -60,7 +94,7 @@ body {
 ------------------------------ */
 .cart-item {
   border-radius: 15px;
-  background-color: #f8f9fa;
+  background-color: #f5f9f4;
   padding: 12px;
   font-size: 0.95rem;
   transition: transform 0.15s ease;
@@ -71,7 +105,6 @@ body {
   transform: scale(1.015);
 }
 
-/* Cart Item Image */
 .cart-img {
   height: 140px;
   object-fit: cover;
@@ -79,16 +112,42 @@ body {
 }
 
 /* ------------------------------
-   Modal Styling
+   Dropdowns and Pagination
+------------------------------ */
+.dropdown-menu {
+  background-color: #e6f0e6;
+}
+
+.dropdown-item:hover {
+  background-color: #d1e4d1;
+}
+
+.btn-outline-secondary,
+.btn-outline-warning {
+  color: #3b6b3b;
+  border-color: #3b6b3b;
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-warning:hover {
+  background-color: #3b6b3b;
+  color: #fff;
+  border-color: #3b6b3b;
+}
+
+/* ------------------------------
+   Modal
+------------------------------ */
+.modal-content {
+  background-color: #f5f9f4;
+  color: #2e3b2e;
+}
+
+/* ------------------------------
+   Ingredients list
 ------------------------------ */
 #modalIngredients li {
   margin-bottom: 4px;
   font-style: italic;
-  color: #555;
-}
-
-.carousel-inner img {
-  object-fit: cover;
-  height: 300px;
-  width: 100%;
+  color: #496649;
 }

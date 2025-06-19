@@ -37,7 +37,7 @@ function updateAddButtonText(name) {
 
   document.querySelectorAll(`[data-food-name="${name}"]`).forEach(button => {
     button.textContent = `Added${item.quantity > 1 ? ' x' + item.quantity : ''}`;
-    button.classList.remove("btn-outline-primary");
+    button.classList.remove("btn-outline-success");
     button.classList.add("btn-success");
   });
 }
@@ -79,7 +79,7 @@ function renderPage(page) {
         </div>
         <div class="card-footer bg-transparent border-top-0">
           <button 
-            class="btn btn-outline-primary w-100" 
+            class="btn btn-outline-success w-100" 
             data-food-name="${item.name}" 
             onclick="addToCart('${item.name}', '${item.image}', ${price})">
             Add to Cart
@@ -102,7 +102,7 @@ function updatePagination(list) {
   const totalPages = Math.ceil(list.length / itemsPerPage);
   for (let i = 1; i <= totalPages; i++) {
     const btn = document.createElement("button");
-    btn.className = `btn btn-sm ${i === currentPage ? 'btn-primary' : 'btn-outline-secondary'} mx-1`;
+    btn.className = `btn btn-sm ${i === currentPage ? 'btn-success' : 'btn-outline-secondary'} mx-1`;
     btn.innerText = i;
     btn.onclick = () => {
       currentPage = i;
