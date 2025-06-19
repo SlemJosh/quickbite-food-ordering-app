@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
- 
+
   <!-- Session check: redirect to login if not logged in or session expired -->
   <script>
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
@@ -18,6 +18,13 @@
     if (!isLoggedIn || isNaN(loginTime) || (Date.now() - loginTime > sessionLimit)) {
       localStorage.clear();
       window.location.href = "login.html";
+    }
+
+    // New: Prevent checkout if cart is empty
+    const tempCart = JSON.parse(localStorage.getItem("cart")) || [];
+    if (!tempCart || tempCart.length === 0) {
+      alert("Your cart is empty. Please add items before checking out.");
+      window.location.href = "cart.html";
     }
   </script>
 
