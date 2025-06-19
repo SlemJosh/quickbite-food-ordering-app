@@ -10,7 +10,7 @@
 
 <body onload="loadFoodDetails()">
 
-  <!-- Session check: redirect to login if not logged in or session expired -->
+  <!-- 🔐 Session Check -->
   <script>
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const loginTime = parseInt(localStorage.getItem("loginTime"));
@@ -22,7 +22,7 @@
     }
   </script>
 
-  <!-- Navbar -->
+  <!-- 🔝 Navbar -->
   <nav class="navbar navbar-dark bg-dark px-3">
     <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
       <span style="font-size: 1.3rem;">🍔</span>
@@ -31,11 +31,11 @@
     <div class="ms-auto d-flex align-items-center gap-2" id="navButtons"></div>
   </nav>
 
-  <!-- Filters and Menu Container -->
+  <!-- 📋 Menu Section -->
   <div class="container my-4">
-    <h2 class="mb-4">Our Menu</h2>
+    <h2 class="mb-4">🍽️ Our Menu</h2>
 
-    <!-- Filter Dropdown -->
+    <!-- 🔽 Filter Dropdown -->
     <div class="dropdown mb-3">
       <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         Filter by Meal Type
@@ -50,14 +50,14 @@
       </ul>
     </div>
 
-    <!-- Menu Cards -->
+    <!-- 🍔 Menu Cards -->
     <div class="row justify-content-center" id="menuContainer"></div>
 
-    <!-- Pagination -->
+    <!-- 🔢 Pagination Controls -->
     <div class="d-flex justify-content-center mt-4" id="paginationContainer"></div>
   </div>
 
-  <!-- Toast Notification -->
+  <!-- ✅ Toast Notification -->
   <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
     <div id="toastNotification" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="d-flex">
@@ -67,7 +67,7 @@
     </div>
   </div>
 
-  <!-- Food Details Modal -->
+  <!-- 🍱 Food Details Modal -->
   <div class="modal fade" id="foodModal" tabindex="-1" aria-labelledby="foodModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -94,11 +94,11 @@
     </div>
   </div>
 
-  <!-- Scripts -->
+  <!-- 📦 Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/foodDetails.js"></script>
 
-  <!-- Navbar Logic -->
+  <!-- 🔁 Navbar Rendering -->
   <script>
     const userEmail = localStorage.getItem("userEmail");
     const nav = document.getElementById("navButtons");
