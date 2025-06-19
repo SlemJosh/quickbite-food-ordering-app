@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-  <!-- 🔒 Session Protection -->
+  <!-- Session Check -->
   <script>
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const loginTime = parseInt(localStorage.getItem("loginTime"));
@@ -29,6 +29,7 @@
     <div class="ms-auto d-flex align-items-center gap-2" id="navButtons"></div>
   </nav>
 
+  <!-- Cart Section -->
   <div class="container my-5">
     <h2 class="mb-4">🛒 Your Cart</h2>
     <div id="cartItems" class="row"></div>
@@ -42,12 +43,15 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Navbar and Cart Script -->
+  <!-- Navbar + Cart Logic -->
   <script>
     const nav = document.getElementById("navButtons");
     const userEmail = localStorage.getItem("userEmail");
-    const cartCount = (JSON.parse(localStorage.getItem("cart")) || []).reduce((sum, item) => sum + item.quantity, 0);
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartContainer = document.getElementById("cartItems");
+    const totalAmountEl = document.getElementById("totalAmount");
 
+    const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
     if (isLoggedIn && userEmail) {
       nav.innerHTML = `
         <span class="text-light small">👤 ${userEmail}</span>
@@ -63,11 +67,6 @@
       localStorage.clear();
       window.location.href = "index.html";
     }
-
-    // 🛒 Render Cart Items
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const cartContainer = document.getElementById("cartItems");
-    const totalAmountEl = document.getElementById("totalAmount");
 
     function renderCart() {
       cartContainer.innerHTML = "";
