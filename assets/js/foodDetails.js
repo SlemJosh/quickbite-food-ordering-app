@@ -26,20 +26,17 @@ function addToCart(name, image, price) {
   }
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCartCount();
-  updateAddButtonText(name);
+  updateButtons(name);
   showToast(`${name} added to cart!`);
 }
 
-function updateAddButtonText(name) {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const item = cart.find(i => i.name === name);
-  if (!item) return;
-
-  document.querySelectorAll(`[data-food-name="${name}"]`).forEach(button => {
-    button.textContent = `Added${item.quantity > 1 ? ' x' + item.quantity : ''}`;
-    button.classList.remove("btn-outline-success");
-    button.classList.add("btn-success");
-  });
+function removeFromCart(name) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart = cart.filter(item => item.name !== name);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+  updateButtons(name);
+  showToast(`${name} removed from cart.`);
 }
 
 function updateCartCount() {
@@ -47,6 +44,26 @@ function updateCartCount() {
   const total = cart.reduce((sum, item) => sum + item.quantity, 0);
   const cartCount = document.getElementById("cartCount");
   if (cartCount) cartCount.innerText = total;
+}
+
+function updateButtons(name) {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const item = cart.find(i => i.name === name);
+  document.querySelectorAll(`[data-food-name="${name}"]`).forEach(button => {
+    if (!item) {
+      button.textContent = "Add to Cart";
+      button.classList.add("btn-outline-success");
+      button.classList.remove("btn-success");
+    } else {
+      button.textContent = `Added${item.quantity > 1 ? ' x' + item.quantity : ''}`;
+      button.classList.remove("btn-outline-success");
+      button.classList.add("btn-success");
+    }
+  });
+
+  document.querySelectorAll(`[data-remove-name="${name}"]`).forEach(removeBtn => {
+    removeBtn.style.display = item ? "inline-block" : "none";
+  });
 }
 
 const itemsPerPage = 9;
@@ -64,6 +81,9 @@ function renderPage(page) {
 
   pageItems.forEach(item => {
     const price = getStickyPrice(item.name);
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const inCart = cart.find(i => i.name === item.name);
+
     const card = document.createElement("div");
     card.className = "col-md-4 mb-3";
 
@@ -77,22 +97,27 @@ function renderPage(page) {
             <p class="card-text"><strong>Price:</strong> $${price}</p>
           </div>
         </div>
-        <div class="card-footer bg-transparent border-top-0">
+        <div class="card-footer bg-transparent border-top-0 d-flex gap-2">
           <button 
-            class="btn btn-outline-success w-100" 
+            class="btn ${inCart ? 'btn-success' : 'btn-outline-success'} w-100" 
             data-food-name="${item.name}" 
             onclick="addToCart('${item.name}', '${item.image}', ${price})">
-            Add to Cart
+            ${inCart ? `Added${inCart.quantity > 1 ? ' x' + inCart.quantity : ''}` : "Add to Cart"}
+          </button>
+          <button 
+            class="btn btn-outline-danger"
+            data-remove-name="${item.name}"
+            style="${inCart ? 'display:inline-block;' : 'display:none;'}"
+            onclick="removeFromCart('${item.name}')">
+            ❌
           </button>
         </div>
       </div>
     `;
 
     container.appendChild(card);
-    updateAddButtonText(item.name);
   });
 
-  updatePagination(list);
   updateCartCount();
 }
 
@@ -102,7 +127,7 @@ function updatePagination(list) {
   const totalPages = Math.ceil(list.length / itemsPerPage);
   for (let i = 1; i <= totalPages; i++) {
     const btn = document.createElement("button");
-    btn.className = `btn btn-sm ${i === currentPage ? 'btn-success' : 'btn-outline-secondary'} mx-1`;
+    btn.className = `btn btn-sm ${i === currentPage ? 'btn-primary' : 'btn-outline-secondary'} mx-1`;
     btn.innerText = i;
     btn.onclick = () => {
       currentPage = i;
@@ -156,3 +181,4 @@ function showModal(item) {
 }
 
 window.addToCart = addToCart;
+window.removeFromCart = removeFromCart;
