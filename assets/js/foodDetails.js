@@ -132,6 +132,7 @@ function updatePagination(list) {
     btn.onclick = () => {
       currentPage = i;
       renderPage(currentPage);
+      updatePagination(list); // So it updates button states too
     };
     pagination.appendChild(btn);
   }
@@ -143,12 +144,14 @@ function filterByMealType(type) {
   );
   currentPage = 1;
   renderPage(currentPage);
+  updatePagination(filteredRecipes); // ✅ Pagination for filtered list
 }
 
 function clearMealFilter() {
   filteredRecipes = [];
   currentPage = 1;
   renderPage(currentPage);
+  updatePagination(allRecipes); // ✅ Pagination for full list
 }
 
 // ==== Modal Rendering ====
@@ -178,6 +181,7 @@ function loadFoodDetails() {
     .then(data => {
       allRecipes = data.recipes;
       renderPage(currentPage);
+      updatePagination(allRecipes); // ✅ Initial pagination
     })
     .catch(err => console.error("Error fetching food:", err));
 }
