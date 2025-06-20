@@ -127,7 +127,7 @@ function updatePagination(list) {
   const totalPages = Math.ceil(list.length / itemsPerPage);
   for (let i = 1; i <= totalPages; i++) {
     const btn = document.createElement("button");
-    btn.className = `btn btn-sm ${i === currentPage ? 'btn-primary' : 'btn-outline-secondary'} mx-1`;
+    btn.className = `btn btn-sm ${i === currentPage ? 'btn-success' : 'btn-outline-success'} mx-1`;
     btn.innerText = i;
     btn.onclick = () => {
       currentPage = i;
