@@ -186,7 +186,12 @@ function loadFoodDetails() {
     .catch(err => console.error("Error fetching food:", err));
 }
 
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 // Expose only necessary functions
+window.scrollToTop = scrollToTop;
 window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
 window.filterByMealType = filterByMealType;

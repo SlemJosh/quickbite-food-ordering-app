@@ -120,3 +120,16 @@ button[data-food-name].btn-success {
   font-style: italic;
   color: #496649;
 }
+
+/* Back to Top Link */
+.back-to-top-link {
+  color: #198754; /* Bootstrap's btn-success green */
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.back-to-top-link:hover {
+  color: #145c32; /* Darker earthy green */
+  text-decoration: underline;
+}
