@@ -35,19 +35,22 @@
   <div class="container my-4">
     <h2 class="mb-4">Our Menu</h2>
 
-    <!-- Filter Dropdown -->
-    <div class="dropdown mb-3">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Filter by Meal Type
-      </button>
-      <ul class="dropdown-menu" id="mealFilterMenu">
-        <li><a class="dropdown-item" href="#" onclick="filterByMealType('Breakfast')">Breakfast</a></li>
-        <li><a class="dropdown-item" href="#" onclick="filterByMealType('Lunch')">Lunch</a></li>
-        <li><a class="dropdown-item" href="#" onclick="filterByMealType('Dinner')">Dinner</a></li>
-        <li><a class="dropdown-item" href="#" onclick="filterByMealType('Snack')">Snack</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#" onclick="clearMealFilter()">Show All</a></li>
-      </ul>
+    <!-- Filter Dropdown + Label -->
+    <div class="d-flex align-items-center mb-3 gap-3">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Filter by Meal Type
+        </button>
+        <ul class="dropdown-menu" id="mealFilterMenu">
+          <li><a class="dropdown-item" href="#" onclick="filterByMealType('Breakfast')">Breakfast</a></li>
+          <li><a class="dropdown-item" href="#" onclick="filterByMealType('Lunch')">Lunch</a></li>
+          <li><a class="dropdown-item" href="#" onclick="filterByMealType('Dinner')">Dinner</a></li>
+          <li><a class="dropdown-item" href="#" onclick="filterByMealType('Snack')">Snack</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#" onclick="clearMealFilter()">Show All</a></li>
+        </ul>
+      </div>
+      <span id="currentFilterLabel" class="text-success small fw-semibold">Viewing: All</span>
     </div>
 
     <!-- Menu Cards -->
@@ -57,9 +60,9 @@
     <div class="d-flex justify-content-center mt-4" id="paginationContainer"></div>
   </div>
 
-    <!-- Back To Top Link  -->
+  <!-- Back To Top Link -->
   <div class="text-center mt-3">
-  <a href="#" onclick="scrollToTop()" class="back-to-top-link">↑ Back to Top</a>
+    <a href="#" onclick="scrollToTop()" class="back-to-top-link">↑ Back to Top</a>
   </div>
 
   <!-- Toast Notification -->
@@ -90,7 +93,8 @@
             <ul id="modalIngredients" class="mb-4 ps-3"></ul>
             <div class="row">
               <div class="text-center mt-4">
-              <button id="modalAddButton" class="btn btn-success">Add to Cart</button></div>
+                <button id="modalAddButton" class="btn btn-success">Add to Cart</button>
+              </div>
               <div class="col-4"><strong>Servings:</strong> <span id="modalServings"></span></div>
               <div class="col-4"><strong>Rating:</strong> <span id="modalRating"></span></div>
               <div class="col-4"><strong>Price:</strong> $<span id="modalPrice"></span></div>

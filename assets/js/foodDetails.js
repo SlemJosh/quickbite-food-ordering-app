@@ -82,7 +82,7 @@ function renderPage(page) {
   const pageItems = list.slice(start, end);
 
   pageItems.forEach(item => {
-    const price = Number(getStickyPrice(item.name)); // Fixed: ensure price is a number
+    const price = Number(getStickyPrice(item.name));
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const inCart = cart.find(i => i.name === item.name);
 
@@ -145,6 +145,10 @@ function filterByMealType(type) {
   currentPage = 1;
   renderPage(currentPage);
   updatePagination(filteredRecipes);
+
+  // ==== Update filter label ====
+  const label = document.getElementById("currentFilterLabel");
+  if (label) label.textContent = `Viewing: ${type}`;
 }
 
 function clearMealFilter() {
@@ -152,6 +156,10 @@ function clearMealFilter() {
   currentPage = 1;
   renderPage(currentPage);
   updatePagination(allRecipes);
+
+  // ==== Reset filter label ====
+  const label = document.getElementById("currentFilterLabel");
+  if (label) label.textContent = "Viewing: All";
 }
 
 // ==== Modal Rendering ====
@@ -174,14 +182,13 @@ function showModal(item) {
 
   modal.show();
 
-  // Modal Add to Cart Button (safe with delay)
   setTimeout(() => {
     const modalBtn = document.getElementById("modalAddButton");
     if (modalBtn) {
       modalBtn.onclick = () => {
         const name = item.name;
         const image = item.image;
-        const price = Number(getStickyPrice(name)); // Fixed: ensure price is a number
+        const price = Number(getStickyPrice(name));
         addToCart(name, image, price);
 
         const modalElement = document.getElementById("foodModal");
