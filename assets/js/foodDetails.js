@@ -82,7 +82,7 @@ function renderPage(page) {
   const pageItems = list.slice(start, end);
 
   pageItems.forEach(item => {
-    const price = getStickyPrice(item.name);
+    const price = Number(getStickyPrice(item.name)); // Fixed: ensure price is a number
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const inCart = cart.find(i => i.name === item.name);
 
@@ -95,7 +95,7 @@ function renderPage(page) {
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">${item.name}</h5>
             <p class="card-text">Rating: ${item.rating}</p>
-            <p class="card-text"><strong>Price:</strong> $${price}</p>
+            <p class="card-text"><strong>Price:</strong> $${price.toFixed(2)}</p>
           </div>
         </div>
         <div class="card-footer bg-transparent border-top-0 d-flex gap-2">
@@ -132,7 +132,7 @@ function updatePagination(list) {
     btn.onclick = () => {
       currentPage = i;
       renderPage(currentPage);
-      updatePagination(list); // So it updates button states too
+      updatePagination(list);
     };
     pagination.appendChild(btn);
   }
@@ -144,19 +144,20 @@ function filterByMealType(type) {
   );
   currentPage = 1;
   renderPage(currentPage);
-  updatePagination(filteredRecipes); // ✅ Pagination for filtered list
+  updatePagination(filteredRecipes);
 }
 
 function clearMealFilter() {
   filteredRecipes = [];
   currentPage = 1;
   renderPage(currentPage);
-  updatePagination(allRecipes); // ✅ Pagination for full list
+  updatePagination(allRecipes);
 }
 
 // ==== Modal Rendering ====
 function showModal(item) {
   const modal = new bootstrap.Modal(document.getElementById("foodModal"));
+
   document.getElementById("modalImage").src = item.image;
   document.getElementById("modalName").innerText = item.name;
   document.getElementById("modalServings").innerText = item.servings;
@@ -172,6 +173,23 @@ function showModal(item) {
   });
 
   modal.show();
+
+  // Modal Add to Cart Button (safe with delay)
+  setTimeout(() => {
+    const modalBtn = document.getElementById("modalAddButton");
+    if (modalBtn) {
+      modalBtn.onclick = () => {
+        const name = item.name;
+        const image = item.image;
+        const price = Number(getStickyPrice(name)); // Fixed: ensure price is a number
+        addToCart(name, image, price);
+
+        const modalElement = document.getElementById("foodModal");
+        const bsModal = bootstrap.Modal.getInstance(modalElement);
+        bsModal.hide();
+      };
+    }
+  }, 100);
 }
 
 // ==== Fetch and Init ====
@@ -181,16 +199,17 @@ function loadFoodDetails() {
     .then(data => {
       allRecipes = data.recipes;
       renderPage(currentPage);
-      updatePagination(allRecipes); // ✅ Initial pagination
+      updatePagination(allRecipes);
     })
     .catch(err => console.error("Error fetching food:", err));
 }
 
+// ==== Utility ====
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// Expose only necessary functions
+// ==== Global Exports ====
 window.scrollToTop = scrollToTop;
 window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
