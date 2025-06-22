@@ -45,9 +45,14 @@ function removeFromCart(name) {
 function updateCartCount() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+
   const cartCount = document.getElementById("cartCount");
   if (cartCount) cartCount.innerText = total;
+
+  const floatingCount = document.getElementById("floatingCartCount");
+  if (floatingCount) floatingCount.textContent = total;
 }
+
 
 // ==== Button State ====
 function updateButtons(name) {
