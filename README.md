@@ -5,7 +5,7 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-yellow?style=flat&logo=javascript)  
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=flat&logo=bootstrap)  
 ![Responsive](https://img.shields.io/badge/Responsive-Yes-brightgreen)  
-![Deployed](https://img.shields.io/badge/Live-Demo-green)
+[![Deployed](https://img.shields.io/badge/Live-Demo-green)](https://quickbite-order.netlify.app)
 
 ## Description
 
@@ -20,10 +20,14 @@ QuickBite is a responsive, front-end food ordering application designed to simul
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Features](#features)
+- [Screenshots 📸](#screenshots-)
+- [Technologies Used](#technologies-used)
+- [Future Development](#future-development)
+- [Author](#author)
 - [License](#license)
 - [Contributing](#contributing)
-- [Tests](#tests)
-- [Questions](#questions)
+- [Image Credits](#image-credits)
 
 ## Installation
 
@@ -43,6 +47,55 @@ _No build tools or dependencies are required._
 
 Browse the food menu, add items to your cart, and proceed to checkout — all within a responsive Bootstrap-powered interface. The app uses a public recipe API to simulate real-world data.
 
+## Features
+
+- Clean and responsive UI with Bootstrap 5.
+- Dynamic food cards with images, ratings, servings, and price.
+- Accordion filter system by meal category (Breakfast, Lunch, Dinner, Snacks).
+- Pagination to control item display.
+- Modal pop-ups for detailed item view.
+- Add-to-cart options both from card and modal.
+- Toast notifications upon adding items.
+- Floating cart icon on mobile for quick access.
+- Persistent localStorage cart across pages.
+- Checkout simulation with confirmation.
+
+## Screenshots 📸
+
+| Page View         | Preview |
+|------------------|---------|
+| Index Page       | ![](./screenshots/index.png) |
+| Menu Page        | ![](./screenshots/menu.png) |
+| Modal View       | ![](./screenshots/modal.png) |
+| Cart Page        | ![](./screenshots/cart.png) |
+| Checkout Page    | ![](./screenshots/checkout.png) |
+| Menu (Mobile)    | ![](./screenshots/menu_mobile.png) |
+| Checkout (Mobile)| ![](./screenshots/checkout_mobile.png) |
+
+## Technologies Used
+
+- HTML5  
+- CSS3  
+- Bootstrap 5  
+- JavaScript (ES6+)  
+- DummyJSON API  
+- Git and GitHub  
+- Netlify for deployment
+
+## Future Development
+
+- Integrate with a real backend (Node/Express) to store user sessions and orders.
+- Enhance cart functionality with promo codes or item customization.
+- Add registration and user profile support.
+- Improve accessibility and keyboard navigation.
+- Add loading states and more animations.
+
+## Author
+
+**Joshua Grant Slem**  
+GitHub: [SlemJosh](https://github.com/SlemJosh)  
+Email: [joshua.slem@gmail.com](mailto:joshua.slem@gmail.com)
+
 ## License
 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
@@ -60,14 +113,3 @@ All carousel images were sourced from [Pixabay.com](https://pixabay.com), which 
 - **Burger Image**: [Burger by amirali mirhashemian](https://pixabay.com/photos/burger-double-burger-hamburger-food-7323697/)
 - **Fries Image**: [French Fries by Engin Akyurt](https://pixabay.com/photos/bowl-french-fries-food-fries-1842294/)
 - **Pizza Image**: [Pizza by Engin Akyurt](https://pixabay.com/photos/pizza-food-fast-food-muzarella-1317699/)
-
-## Tests
-
-No tests are currently included with this project.
-
-## Questions
-
-If you have any questions or feedback, feel free to reach out:
-
-- GitHub: [SlemJosh](https://github.com/SlemJosh)
-- Email: [joshua.slem@gmail.com](mailto:joshua.slem@gmail.com)
